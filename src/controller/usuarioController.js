@@ -31,8 +31,20 @@ const listarUsuarioIdController = async (request, response) => {
   }
 }
 
+const listarUsuarioNomeController = async (request, response) => {
+  const { nomeUsuario } = request.params
+
+  try {
+    const listarUsuarioNome = await usuarioServices.listarUsuarioNomeServices(nomeUsuario)
+    response.status(200).send({listarUsuarioNome})
+  } catch (err) {
+    response.status(400).send(err.message)
+  }
+}
+
 export default {
   criarUsuarioController,
   listarTodosUsuariosController,
-  listarUsuarioIdController
+  listarUsuarioIdController,
+  listarUsuarioNomeController
 }
