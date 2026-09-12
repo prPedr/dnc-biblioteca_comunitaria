@@ -26,6 +26,17 @@ const criarUsuarioSevices = async (novoUsuario) => {
   return criarUsuario
 }
 
+const listarTodosUsuariosServices = async () => {
+  const listarTodosUsuarios = await usuarioRepositories.listarTodosUsuariosRepositories()
+
+  if (!listarTodosUsuarios) {
+    throw new Error ("Falha ao litar todos os usuarios.")
+  }
+
+  return listarTodosUsuarios
+}
+
 export default {
-  criarUsuarioSevices
+  criarUsuarioSevices,
+  listarTodosUsuariosServices
 }
