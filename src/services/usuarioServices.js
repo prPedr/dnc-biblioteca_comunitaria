@@ -30,7 +30,7 @@ const listarTodosUsuariosServices = async () => {
   const listarTodosUsuarios = await usuarioRepositories.listarTodosUsuariosRepositories()
 
   if (!listarTodosUsuarios) {
-    throw new Error ("Falha ao litar todos os usuarios.")
+    throw new Error ("Falha ao litar todos os usuarios")
   }
 
   return listarTodosUsuarios
@@ -56,9 +56,20 @@ const listarUsuarioNomeServices = async (nomeUsuario) => {
   return listarUsuarioNome
 }
 
+const listarUsuarioEmailServices = async (email) => {
+  const listarUsuarioEmail = await usuarioRepositories.buscarUsuarioEmailRepositories(email)
+
+  if (!listarUsuarioEmail) {
+    throw new Error ("E-mail de usuario nao encontrado")
+  }
+
+  return listarUsuarioEmail
+}
+
 export default {
   criarUsuarioSevices,
   listarTodosUsuariosServices,
+  listarUsuarioIdServives,
   listarUsuarioNomeServices,
-  listarUsuarioIdServives
+  listarUsuarioEmailServices
 }
