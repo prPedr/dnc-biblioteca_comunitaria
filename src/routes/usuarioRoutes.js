@@ -13,4 +13,9 @@ router.get(
   usuarioController.listarTodosUsuariosController
 )
 
+router.get(
+  "/usuarios/id/:id",
+  usuarioController.listarUsuarioIdController
+)
+
 export default router

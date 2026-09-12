@@ -36,7 +36,18 @@ const listarTodosUsuariosServices = async () => {
   return listarTodosUsuarios
 }
 
+const listarUsuarioIdServives = async (id) => {
+  const listarUsuarioId = await usuarioRepositories.buscarUsuarioIdRepositories(id)
+
+  if (!listarUsuarioId) {
+    throw new Error ("ID de usuario nao encontrado")
+  }
+
+  return listarUsuarioId
+}
+
 export default {
   criarUsuarioSevices,
-  listarTodosUsuariosServices
+  listarTodosUsuariosServices,
+  listarUsuarioIdServives
 }

@@ -57,6 +57,28 @@ const listarTodosUsuariosRepositories = () => {
   })
 }
 
+const buscarUsuarioIdRepositories = (id) => {
+  return new Promise((resolve, reject) => {
+    db.get(
+      `
+        SELECT id, nomeUsuario, email, fotoPerfil
+        FROM usuarios
+        WHERE id = ?
+      `,
+
+      [id],
+
+      (err, linhaId) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(linhaId)
+        }
+      }
+    )
+  })
+}
+
 const buscarUsuarioNomeRepositories = (nomeUsuario) => {
   return new Promise((resolve, reject) => {
     db.get(
@@ -104,6 +126,7 @@ const buscarUsuarioEmailRepositories = (email) => {
 export default {
   criarUsuarioRepositories,
   listarTodosUsuariosRepositories,
+  buscarUsuarioIdRepositories,
   buscarUsuarioNomeRepositories,
   buscarUsuarioEmailRepositories
 }
