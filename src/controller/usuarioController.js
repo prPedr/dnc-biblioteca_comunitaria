@@ -1,10 +1,11 @@
+import { tr } from "zod/v4/locales/index.js";
 import usuarioServices from "../services/usuarioServices.js"
 
 const criarUsuarioController = async (request, response) => {
   const novoUsuario = request.body
 
   try {
-    const criarUsuario = await usuarioServices.criarUsuarioSevices(novoUsuario)
+    const criarUsuario = await usuarioServices.criarUsuarioServices(novoUsuario)
     response.status(201).send({criarUsuario})
   } catch (err) {
     response.status(404).send(err.message)
@@ -53,10 +54,27 @@ const listarUsuarioEmailController = async (request, response) => {
   }
 }
 
+const atualizarUsuarioController = async (request, response) => {
+  const { id, nomeUsuario, email } = request.params
+  const dadosAtualizados = request.body
+
+  try {
+    const atualizarUsuario = await usuarioServices.atualizarUsuarioServices(
+      { id, nomeUsuario, email },
+      dadosAtualizados
+    )
+    response.status(200).send({ atualizarUsuario })
+  } catch (err) {
+    response.status(400).send(err.message)
+  }
+}
+
+
 export default {
   criarUsuarioController,
   listarTodosUsuariosController,
   listarUsuarioIdController,
   listarUsuarioNomeController,
-  listarUsuarioEmailController
+  listarUsuarioEmailController,
+  atualizarUsuarioController
 }

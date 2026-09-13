@@ -123,10 +123,42 @@ const buscarUsuarioEmailRepositories = (email) => {
   })
 }
 
+const atualizarUsuarioRepositories = (id, dadosAtualizados) => {
+  return new Promise((resolve, reject) => {
+    const { nomeUsuario, email, senha, fotoPerfil } = dadosAtualizados
+
+    db.run(
+      `
+        UPDATE usuarios
+        SET 
+          nomeUsuario = COALESCE(?, nomeUsuario),
+          email = COALESCE(?, email),
+          senha = COALESCE(?, senha),
+          fotoPerfil = COALESCE(?, fotoPerfil)
+        WHERE id = ?
+      `,
+
+      [nomeUsuario, email, senha, fotoPerfil, id],
+      
+      function (err) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve({
+            id,
+            Mensagem: "Usuario atualizado com sucesso."
+          })
+        }
+      }
+    )
+  })
+}
+
 export default {
   criarUsuarioRepositories,
   listarTodosUsuariosRepositories,
   buscarUsuarioIdRepositories,
   buscarUsuarioNomeRepositories,
-  buscarUsuarioEmailRepositories
+  buscarUsuarioEmailRepositories,
+  atualizarUsuarioRepositories
 }

@@ -31,4 +31,22 @@ router.get(
   usuarioController.listarUsuarioEmailController
 )
 
+router.put(
+  "/usuarios/id/:id",
+  validacaoMiddlewares(usuarioSchema),
+  usuarioController.atualizarUsuarioController
+)
+
+router.put(
+  "/usuarios/nomeUsuario/:nomeUsuario",
+  validacaoMiddlewares(usuarioSchema),
+  usuarioController.atualizarUsuarioController
+)
+
+router.put(
+  "/usuarios/email/:email",
+  validacaoMiddlewares(usuarioSchema),
+  usuarioController.atualizarUsuarioController
+)
+
 export default router
