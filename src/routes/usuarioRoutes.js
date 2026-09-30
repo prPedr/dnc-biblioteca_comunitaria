@@ -1,13 +1,13 @@
 import { Router } from "express"
 import usuarioController from "../controller/usuarioController.js"
 import validacaoMiddlewares from "../middlewares/validacaoMiddlewares.js"
-import usuarioSchema from "../schema/usuarioSchema.js"
+import schemas from "../schema/usuarioSchema.js"
 
 const router = Router()
 
 router.post(
   "/usuarios",
-  validacaoMiddlewares(usuarioSchema),
+  validacaoMiddlewares(schemas.usuarioSchema, "body"),
   usuarioController.criarUsuarioController
 )
 
@@ -18,6 +18,7 @@ router.get(
 
 router.get(
   "/usuarios/id/:id",
+  validacaoMiddlewares(schemas.idParamSchema, "params"),
   usuarioController.listarUsuarioIdController
 )
 
@@ -33,24 +34,26 @@ router.get(
 
 router.put(
   "/usuarios/id/:id",
-  validacaoMiddlewares(usuarioSchema),
+  validacaoMiddlewares(schemas.idParamSchema, "params"),
+  validacaoMiddlewares(schemas.usuarioSchema, "body"),
   usuarioController.atualizarUsuarioController
 )
 
 router.put(
   "/usuarios/nomeUsuario/:nomeUsuario",
-  validacaoMiddlewares(usuarioSchema),
+  validacaoMiddlewares(schemas.usuarioSchema),
   usuarioController.atualizarUsuarioController
 )
 
 router.put(
   "/usuarios/email/:email",
-  validacaoMiddlewares(usuarioSchema),
+  validacaoMiddlewares(schemas.usuarioSchema),
   usuarioController.atualizarUsuarioController
 )
 
 router.delete(
   "/usuarios/id/:id",
+  validacaoMiddlewares(schemas.idParamSchema, "params"),
   usuarioController.excluirUsuarioController
 )
 

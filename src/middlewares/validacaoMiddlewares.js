@@ -1,5 +1,5 @@
-const validacao = (schema) => (request, response, next) => {
-  const resultado = schema.safeParse(request.body)
+const validacao = (schema, alvo = "body") => (request, response, next) => {
+  const resultado = schema.safeParse(request[alvo])
 
   if (!resultado.success) {
     const errosFormatados = resultado.error.issues.map((erro) => ({
@@ -13,7 +13,7 @@ const validacao = (schema) => (request, response, next) => {
     })
   }
 
-  request.body = resultado.data
+  request[alvo] = resultado.data
   next()
 }
 

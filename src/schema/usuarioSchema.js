@@ -26,4 +26,14 @@ const usuarioSchema = z.object({
     .optional()
 })
 
-export default usuarioSchema
+const idParamSchema = z.object({
+  id: z.coerce
+    .number({ invalid_type_error: "O ID deve ser um número inteiro." })
+    .int("O ID deve ser um número inteiro.")
+    .positive("O ID deve ser um número positivo.")
+})
+
+export default {
+  usuarioSchema,
+  idParamSchema
+}
