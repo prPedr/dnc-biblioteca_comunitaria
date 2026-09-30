@@ -49,4 +49,19 @@ router.put(
   usuarioController.atualizarUsuarioController
 )
 
+router.delete(
+  "/usuarios/id/:id",
+  usuarioController.excluirUsuarioController
+)
+
+router.delete(
+  "/usuarios/nomeUsuario/:nomeUsuario",
+  usuarioController.excluirUsuarioController
+)
+
+router.delete(
+  "/usuarios/email/:email",
+  usuarioController.excluirUsuarioController
+)
+
 export default router

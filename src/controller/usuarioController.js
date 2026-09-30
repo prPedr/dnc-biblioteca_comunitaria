@@ -69,6 +69,16 @@ const atualizarUsuarioController = async (request, response) => {
   }
 }
 
+const excluirUsuarioController = async (request, response) => {
+  const { id, nomeUsuario, email } = request.params
+
+  try {
+    const excluirUsuario = await usuarioServices.excluirUsuarioServices({ id, nomeUsuario, email})
+    response.status(200).send({excluirUsuario})
+  } catch (error) {
+    response.status(400).send(error.message)
+  }
+}
 
 export default {
   criarUsuarioController,
@@ -76,5 +86,6 @@ export default {
   listarUsuarioIdController,
   listarUsuarioNomeController,
   listarUsuarioEmailController,
-  atualizarUsuarioController
+  atualizarUsuarioController,
+  excluirUsuarioController
 }

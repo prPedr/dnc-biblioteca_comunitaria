@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt"
 import usuarioRepositories from "../repositories/usuarioRepositories.js"
+import { file } from "zod";
 
 const criarUsuarioServices = async (novoUsuario) => {
   const buscarUsuarioNome = await usuarioRepositories.buscarUsuarioNomeRepositories(novoUsuario.nomeUsuario)
@@ -69,7 +70,6 @@ const listarUsuarioEmailServices = async (email) => {
 const atualizarUsuarioServices = async (filtro, dadosAtualizados) => {
   let usuarioEncontrado = null
 
-  // Busca o usuário usando as funções existentes de busca
   if (filtro.id) {
     usuarioEncontrado = await usuarioRepositories.buscarUsuarioIdRepositories(filtro.id)
   } else if (filtro.nomeUsuario) {
@@ -98,11 +98,38 @@ const atualizarUsuarioServices = async (filtro, dadosAtualizados) => {
   return usuarioAtualizado
 }
 
+const excluirUsuarioServices = async (filtro) => {
+  let usuarioEncontrado = null
+
+  if (filtro.id) {
+    usuarioEncontrado = await usuarioRepositories.buscarUsuarioIdRepositories(filtro.id)
+  } else if (filtro.nomeUsuario) {
+    usuarioEncontrado = await usuarioRepositories.buscarUsuarioNomeRepositories(filtro.nomeUsuario)
+  } else if (filtro.email) {
+    usuarioEncontrado = await usuarioRepositories.buscarUsuarioEmailRepositories(filtro.email)
+  }
+
+  if (!usuarioEncontrado) {
+    throw new Error("Usuario nao encontrado para atualizacao")
+  }
+
+  const excluirUsuario = await usuarioRepositories.excluirUsuarioRepositories(
+    usuarioEncontrado.id
+  )
+
+  if (!excluirUsuario) {
+    throw new Error("Falha ao excluir o usuario")
+  }
+
+  return excluirUsuario
+}
+
 export default {
   criarUsuarioServices,
   listarTodosUsuariosServices,
   listarUsuarioIdServives,
   listarUsuarioNomeServices,
   listarUsuarioEmailServices,
-  atualizarUsuarioServices
+  atualizarUsuarioServices,
+  excluirUsuarioServices
 }

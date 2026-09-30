@@ -1,3 +1,4 @@
+import id from "zod/v4/locales/id.cjs";
 import db from "../config/database.js"
 
 db.run(
@@ -154,11 +155,36 @@ const atualizarUsuarioRepositories = (id, dadosAtualizados) => {
   })
 }
 
+const excluirUsuarioRepositories = (id) => {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `
+        DELETE FROM usuarios
+        WHERE id = ?
+      `,
+
+      [id],
+
+      (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve({
+            id,
+            Mensagem : "Usuario excluido"
+          })
+        }
+      }
+    )
+  })
+}
+
 export default {
   criarUsuarioRepositories,
   listarTodosUsuariosRepositories,
   buscarUsuarioIdRepositories,
   buscarUsuarioNomeRepositories,
   buscarUsuarioEmailRepositories,
-  atualizarUsuarioRepositories
+  atualizarUsuarioRepositories,
+  excluirUsuarioRepositories
 }
