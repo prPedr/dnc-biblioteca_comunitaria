@@ -82,12 +82,10 @@ const atualizarUsuarioServices = async (filtro, dadosAtualizados) => {
     throw new Error("Usuario nao encontrado para atualizacao")
   }
 
-  // Se a senha foi enviada no body, gera o hash
   if (dadosAtualizados.senha) {
     dadosAtualizados.senha = await bcrypt.hash(dadosAtualizados.senha, 10)
   }
 
-  // Atualiza usando o ID resolvido da busca
   const usuarioAtualizado = await usuarioRepositories.atualizarUsuarioRepositories(
     usuarioEncontrado.id,
     dadosAtualizados
