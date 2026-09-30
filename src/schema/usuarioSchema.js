@@ -26,6 +26,8 @@ const usuarioSchema = z.object({
     .optional()
 })
 
+const atualizarUsuarioSchema = usuarioSchema.partial()
+
 const idParamSchema = z.object({
   id: z.coerce
     .number({ invalid_type_error: "O ID deve ser um número inteiro." })
@@ -35,5 +37,6 @@ const idParamSchema = z.object({
 
 export default {
   usuarioSchema,
+  atualizarUsuarioSchema,
   idParamSchema
 }

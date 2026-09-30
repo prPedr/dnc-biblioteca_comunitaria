@@ -32,22 +32,22 @@ router.get(
   usuarioController.listarUsuarioEmailController
 )
 
-router.put(
+router.patch(
   "/usuarios/id/:id",
   validacaoMiddlewares(schemas.idParamSchema, "params"),
-  validacaoMiddlewares(schemas.usuarioSchema, "body"),
+  validacaoMiddlewares(schemas.atualizarUsuarioSchema, "body"),
   usuarioController.atualizarUsuarioController
 )
 
-router.put(
+router.patch(
   "/usuarios/nomeUsuario/:nomeUsuario",
-  validacaoMiddlewares(schemas.usuarioSchema),
+  validacaoMiddlewares(schemas.atualizarUsuarioSchema),
   usuarioController.atualizarUsuarioController
 )
 
-router.put(
+router.patch(
   "/usuarios/email/:email",
-  validacaoMiddlewares(schemas.usuarioSchema),
+  validacaoMiddlewares(schemas.atualizarUsuarioSchema),
   usuarioController.atualizarUsuarioController
 )
 
