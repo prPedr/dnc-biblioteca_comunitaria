@@ -4,8 +4,8 @@ const criarUsuarioController = async (request, response) => {
   const novoUsuario = request.body
 
   try {
-    const criarUsuario = await usuarioServices.criarUsuarioServices(novoUsuario)
-    response.status(201).send({criarUsuario})
+    const token = await usuarioServices.criarUsuarioServices(novoUsuario)
+    response.status(201).send({token})
   } catch (err) {
     response.status(404).send(err.message)
   }

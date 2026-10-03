@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt"
 import usuarioRepositories from "../repositories/usuarioRepositories.js"
+import gerarJWT from "../services/autenticacaoService.js";
 
 const criarUsuarioServices = async (novoUsuario) => {
   const buscarUsuarioNome = await usuarioRepositories.buscarUsuarioNomeRepositories(novoUsuario.nomeUsuario)
@@ -23,7 +24,9 @@ const criarUsuarioServices = async (novoUsuario) => {
     throw new Error ("Falha ao criar o usuario")
   }
 
-  return criarUsuario
+  const token = gerarJWT(criarUsuario.id)
+
+  return token
 }
 
 const listarTodosUsuariosServices = async () => {
