@@ -1,4 +1,3 @@
-import { tr } from "zod/v4/locales/index.js";
 import usuarioServices from "../services/usuarioServices.js"
 
 const criarUsuarioController = async (request, response) => {

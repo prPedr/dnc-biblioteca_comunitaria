@@ -1,4 +1,3 @@
-import id from "zod/v4/locales/id.cjs";
 import db from "../config/database.js"
 
 db.run(

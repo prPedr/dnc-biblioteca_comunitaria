@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt"
 import usuarioRepositories from "../repositories/usuarioRepositories.js"
-import { file } from "zod";
 
 const criarUsuarioServices = async (novoUsuario) => {
   const buscarUsuarioNome = await usuarioRepositories.buscarUsuarioNomeRepositories(novoUsuario.nomeUsuario)
